@@ -11,15 +11,15 @@ interface Project {
   color: string;
 }
 
-const ProjectCard: React.FC<{ project: Project; selected: boolean; onClick: () => void }> = ({ project, selected, onClick }) => {
-  const cardColor = selected ? project.color : 'white';
-
+const ProjectCard: React.FC<{
+  project: Project;
+  onClick: () => void;
+}> = ({ project, onClick }) => {
   return (
     <div
       className="project-card"
-      key={project.id}
       style={{
-        backgroundColor: cardColor,
+        backgroundColor: 'white', // Set a static background color
         padding: '10px',
         border: '1px solid #ccc',
         margin: '10px',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MiniDrawer from './layouts/side-bar'; 
+import MiniDrawer from './layouts/side-bar'; // Provide the correct relative path
 import Dashboard from './pages/dashboard';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <MiniDrawer /> {/* Render the menu bar and sidebar */}
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
+        {/* Add more routes for other pages as needed */}
       </Routes>
     </Router>
   );

@@ -37,16 +37,32 @@
   padding: 20px;
 }
 
-.project-card {
-  border: 1px solid #ccc;
-  margin: 10px;
-  padding: 10px;
-  cursor: pointer;
+/* Update the projectList style to move it up */
+.projectList {
+  grid-area: projectList;
+  padding: 0% 16px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-right: 0px solid #f1f1f1;
+  /* Add margin and alignment properties */
+  margin-top: 0px; /* Adjust as needed */
 }
 
-.project-card:hover {
-  background-color: #eee;
+/* Update the projectDetails style to align it to the left side */
+.projectDetails {
+  /* Add left alignment properties */
+  float: left;
+  padding: 0px; /* Adjust as needed */
+  background: #ffffff;
+  /* Add margin and alignment properties */
+  margin-top: 0px; /* Adjust as needed */
 }
+
+
+.project-card:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}
+
 
 .project-card.selected {
   background-color: #007bff;
