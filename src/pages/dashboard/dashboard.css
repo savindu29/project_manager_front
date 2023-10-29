@@ -1,0 +1,54 @@
+/* .dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr 500px; /* Increase the width of the third column to 500px 
+    grid-template-areas: "menu projectList projectDetails";
+    height: 100vh;
+    background: #f0f0f0; /* Add a light gray background to the entire dashboard 
+  
+  
+  .projectList {
+    grid-area: projectList;
+    padding: 16px;
+    overflow-y: auto;
+    background: #ffffff; /* Set the background of the project list to white 
+    border-right: 1px solid #f1f1f1; /* Add a light gray border to the right side of the project list 
+  }
+  
+  .projectDetails {
+    grid-area: projectDetails;
+    padding: 10x;
+    background: #ffffff; /* Set the background of the project details to white 
+  }
+   */
+   /* dashboard.css */
+
+.dashboard {
+  display: flex;
+}
+
+.sidebar {
+  width: 240px;
+  background: #333;
+  color: #fff;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.project-card {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  background-color: #eee;
+}
+
+.project-card.selected {
+  background-color: #007bff;
+  color: #fff;
+}
