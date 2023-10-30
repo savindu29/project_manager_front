@@ -31,7 +31,7 @@ const ProjectList = styled('div')({
   background: '#ffffff',
   borderRight: '0px solid #f1f1f1',
   marginLeft: '-76px',
-  marginTop: '-60px',
+  marginTop: '22px',
 });
 const LightGray = '#696969';
 interface Project {
@@ -180,51 +180,54 @@ const ProjectDetails: React.FC<{
       setProjectData(null);
     }
   }, [selectedProject]);
-
   return (
-    <div className="dashboard">
+    <div className="dashboard-container">
       {projectData ? (
         <div className="project-details">
           <div className="project-details-column">
             <div className="project-header">
               <h2>{projectData.name}</h2>
             </div>
-            <div className="project-content">
-              <div className="info-card">
-                <h3>Basic Information</h3>
+            <div className="info-card">
+              <h3>Basic Information</h3>
+              <div className="info-list">
                 <p>Project ID: {projectData.id}</p>
-                <p>Initiation Date: {projectData.initiationDate}</p>
-                <p>Proposal Due Date: {projectData.proposalDueDate}</p>
-                <p>PI Start Date: {projectData.piStartDate}</p>
-                <p>AC Start Date: {projectData.acStartDate}</p>
+                <p>Initiation Date: {formatDate(projectData.initiationDate)}</p>
+                <p>Proposal Due Date: {formatDate(projectData.proposalDueDate)}</p>
+                <p>PI Start Date: {formatDate(projectData.piStartDate)}</p>
+                <p>AC Start Date: {formatDate(projectData.acStartDate)}</p>
               </div>
             </div>
           </div>
           <div className="project-details-column">
             <div className="info-card">
               <h3>Code and Priority</h3>
-              <p>Code: {projectData.code}</p>
-              <p>Priority: {projectData.priority.name}</p>
+              <div className="info-list">
+                <p>Code: {projectData.code}</p>
+                <p>Priority: {projectData.priority.name}</p>
+              </div>
             </div>
             <div className="status-history-card">
               <h3>Project Status</h3>
-              <p>Status: {projectData.projectStatus.name}</p>
+              <div className="info-list">
+                <p>Status: {projectData.projectStatus.name}</p>
+              </div>
             </div>
             <div className="status-history-card">
               <h3>Status History</h3>
               <ul className="status-history-list">
-              {projectData.statusHistoryList.map((status, index) => (
-                <li key={index}>
-                  Date: <span className="status-date">{formatDate(status.date)}</span>, Description: {status.description || 'N/A'}
-                </li>
-              ))}
-            </ul>
-            </div>  
-        </div>
+                {projectData.statusHistoryList.map((status, index) => (
+                  <li key={index}>
+                    Date: <span className="status-date">{formatDate(status.date)}</span>, Description: {status.description || 'N/A'}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="no-project-selected">
-          <Typography variant="h4">No project selected.</Typography>
+          <h4>No project selected.</h4>
         </div>
       )}
     </div>

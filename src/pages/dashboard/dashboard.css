@@ -1,65 +1,115 @@
 .dashboard {
   display: flex;
-  margin-top: 120px; 
+  margin-top: 120px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
   width: 240px;
-  background: #333;
+  background-color: #333;
   color: #fff;
+  border-right: 1px solid #ccc;
 }
 
-.content {
-  flex-grow: 1;
-  padding: 0px;
-}
-
-/* Update the projectList style to move it up */
-.dashboard {
+.dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f5f5f5;
+  padding: 20px;
 }
 
 .project-details {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .project-details-column {
   flex: 1;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .project-header {
-  background-color: royalblue;
+  background-color: #696969;
   color: white;
-  padding: 10px 0;
+  padding: 15px 0;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .info-card, .status-history-card {
   background-color: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 20px; /* Increased padding for more space */
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .info-card h3, .status-history-card h3 {
   color: #333;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+.info-list {
+  line-height: 1.4;
+  font-family: sans-serif;
 }
 
 .status-history-list {
   list-style-type: none;
   padding: 0;
+  font-family: sans-serif;
 }
 
 .status-date {
   color: gray;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.no-project-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.no-project-selected h4 {
+  font-size: 24px;
+  color: #555;
+  font-family: sans-serif;
+}
+
+i {
+  margin-left: 10px;
+  font-size: 1rem; /* Adjust icon size */
+}
+
+.additional-details, .effort-estimators, .todo-list {
+  margin-top: 20px;
+}
+
+.status-history-list li {
+  margin-bottom: 10px;
 }
