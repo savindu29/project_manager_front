@@ -1,29 +1,6 @@
-/* .dashboard {
-    display: grid;
-    grid-template-columns: 240px 1fr 500px; /* Increase the width of the third column to 500px 
-    grid-template-areas: "menu projectList projectDetails";
-    height: 100vh;
-    background: #f0f0f0; /* Add a light gray background to the entire dashboard 
-  
-  
-  .projectList {
-    grid-area: projectList;
-    padding: 16px;
-    overflow-y: auto;
-    background: #ffffff; /* Set the background of the project list to white 
-    border-right: 1px solid #f1f1f1; /* Add a light gray border to the right side of the project list 
-  }
-  
-  .projectDetails {
-    grid-area: projectDetails;
-    padding: 10x;
-    background: #ffffff; /* Set the background of the project details to white 
-  }
-   */
-   /* dashboard.css */
-
 .dashboard {
   display: flex;
+  margin-top: 120px; 
 }
 
 .sidebar {
@@ -34,37 +11,55 @@
 
 .content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 0px;
 }
 
 /* Update the projectList style to move it up */
-.projectList {
-  grid-area: projectList;
-  padding: 0% 16px;
-  overflow-y: auto;
-  background: #ffffff;
-  border-right: 0px solid #f1f1f1;
-  /* Add margin and alignment properties */
-  margin-top: 0px; /* Adjust as needed */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
-/* Update the projectDetails style to align it to the left side */
-.projectDetails {
-  /* Add left alignment properties */
-  float: left;
-  padding: 0px; /* Adjust as needed */
-  background: #ffffff;
-  /* Add margin and alignment properties */
-  margin-top: 0px; /* Adjust as needed */
+.project-details {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 20px;
 }
 
-
-.project-card:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
+.project-details-column {
+  flex: 1;
+  padding: 20px;
 }
 
+.project-header {
+  background-color: royalblue;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
 
-.project-card.selected {
-  background-color: #007bff;
-  color: #fff;
+.info-card, .status-history-card {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.info-card h3, .status-history-card h3 {
+  color: #333;
+}
+
+.status-history-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.status-date {
+  color: gray;
 }

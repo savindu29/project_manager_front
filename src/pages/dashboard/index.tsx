@@ -31,8 +31,9 @@ const ProjectList = styled('div')({
   background: '#ffffff',
   borderRight: '0px solid #f1f1f1',
   marginLeft: '-76px',
+  marginTop: '-60px',
 });
-
+const LightGray = '#696969';
 interface Project {
   id: number;
   projectName: string;
@@ -41,17 +42,32 @@ interface Project {
   todo: string;
   currentStatus: string;
   latestStatusHistoryDate: string;
-  color: string; // Add a color property
+  color: string; 
 }
-
-function getRandomColor() {
-  // Generate a random light color
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+interface ProjectData {
+  id: number;
+  name: string;
+  initiationDate: string;
+  proposalDueDate: string;
+  piStartDate: string;
+  acStartDate: string;
+  cdDetails: string;
+  lessonsLearned: string;
+  code: string;
+  priority: {
+    id: number;
+    name: string;
+    code: string;
+  };
+  projectStatus: {
+    id: number;
+    name: string;
+  };
+  statusHistoryList: Array<{
+    id: number;
+    date: string;
+    description: string | null;
+  }>;
 }
 
 const Dashboard: React.FC = () => {
@@ -63,12 +79,7 @@ const Dashboard: React.FC = () => {
       .get('http://localhost:8000/api/v1/project/list?page=1&size=11')
       .then((response) => {
         const data: Project[] = response.data.data;
-        // Assign unique colors to each project
-        const projectsWithColors = data.map((project) => ({
-          ...project,
-          color: getRandomColor(),
-        }));
-        setProjects(projectsWithColors);
+        setProjects(data);
       })
       .catch((error) => {
         console.error('Error fetching data from the API:', error);
@@ -77,24 +88,26 @@ const Dashboard: React.FC = () => {
 
   return (
     <DashboardContainer className="dashboard">
-      <Sidebar className="sidebar">
-        {/* Content for the sidebar */}
-      </Sidebar>
-      <ProjectList className="projectList">
-        <div>
-          {Array.isArray(projects) &&
-            projects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onClick={setSelectedProject}
-                isSelected={selectedProject === project}
-              />
-            ))}
-        </div>
-      </ProjectList>
-      <ProjectDetails selectedProject={selectedProject} isSelected={!!selectedProject} />
-    </DashboardContainer>
+    <ProjectDetails selectedProject={selectedProject} isSelected={!!selectedProject} />
+    <ProjectList className="projectList">
+      <div>
+        {Array.isArray(projects) &&
+          projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onClick={setSelectedProject}
+              isSelected={selectedProject === project}
+            />
+          ))}
+      </div>
+    </ProjectList>
+    <Sidebar className="sidebar">
+      {/* Content for the sidebar */}
+    </Sidebar>
+  </DashboardContainer>
+  
+  
   );
 };
 
@@ -108,16 +121,17 @@ const ProjectCard: React.FC<{
       variant="outlined"
       onClick={() => onClick(project)}
       sx={{
-        background: isSelected ? project.color : '#f5f5f5', // Use project color when selected
+        background: isSelected ? LightGray : '#f5f5f5', 
         padding: '16px',
         borderRadius: '10px',
         boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+        maxHeight: '198px',
       }}
     >
-      <CardContent>
+      <CardContent sx={{ margin: 0, padding: 0 }}>
         <div>
           <Typography variant="h5" component="div">
-            <span style={{ color: 'black' }}>Project Name:</span> <span style={{ color: '#007bff' }}>{project.projectName}</span>
+            <span style={{ color: 'black' }}>Project Name:<br></br></span> <span style={{ color: '#007bff' }}>{project.projectName}</span>
           </Typography>
         </div>
         <div>
@@ -149,26 +163,73 @@ const ProjectCard: React.FC<{
     </Card>
   </Box>
 );
-
 const ProjectDetails: React.FC<{
   selectedProject: Project | null;
   isSelected: boolean;
-}> = ({ selectedProject, isSelected }) => (
-  <div className="projectDetails" style={{ background: isSelected ? selectedProject?.color : 'white' }}>
-    {selectedProject ? (
-      <div>
-        <Typography variant="h4" style={{ color: isSelected ? 'white' : 'black' }}>
-          Project ID: {selectedProject.id}
-        </Typography>
-        <p style={{ color: isSelected ? 'white' : 'black' }}>{selectedProject.todo}</p>
-      </div>
-    ) : (
-      <div>
-        <Typography variant="h4" style={{ color: isSelected ? 'white' : 'black' }}>No project selected.</Typography>
-      </div>
-    )}
-  </div>
-);
+}> = ({ selectedProject, isSelected }) => {
+  const [projectData, setProjectData] = useState<null | ProjectData>(null);
+
+  useEffect(() => {
+    // Fetch project data from the API when selectedProject changes
+    if (selectedProject) {
+      fetch(`http://localhost:8000/api/v1/project/${selectedProject.id}`)
+        .then((response) => response.json())
+        .then((data) => setProjectData(data.data))
+        .catch((error) => console.error('Error fetching project data:', error));
+    } else {
+      setProjectData(null);
+    }
+  }, [selectedProject]);
+
+  return (
+    <div className="dashboard">
+      {projectData ? (
+        <div className="project-details">
+          <div className="project-details-column">
+            <div className="project-header">
+              <h2>{projectData.name}</h2>
+            </div>
+            <div className="project-content">
+              <div className="info-card">
+                <h3>Basic Information</h3>
+                <p>Project ID: {projectData.id}</p>
+                <p>Initiation Date: {projectData.initiationDate}</p>
+                <p>Proposal Due Date: {projectData.proposalDueDate}</p>
+                <p>PI Start Date: {projectData.piStartDate}</p>
+                <p>AC Start Date: {projectData.acStartDate}</p>
+              </div>
+            </div>
+          </div>
+          <div className="project-details-column">
+            <div className="info-card">
+              <h3>Code and Priority</h3>
+              <p>Code: {projectData.code}</p>
+              <p>Priority: {projectData.priority.name}</p>
+            </div>
+            <div className="status-history-card">
+              <h3>Project Status</h3>
+              <p>Status: {projectData.projectStatus.name}</p>
+            </div>
+            <div className="status-history-card">
+              <h3>Status History</h3>
+              <ul className="status-history-list">
+              {projectData.statusHistoryList.map((status, index) => (
+                <li key={index}>
+                  Date: <span className="status-date">{formatDate(status.date)}</span>, Description: {status.description || 'N/A'}
+                </li>
+              ))}
+            </ul>
+            </div>  
+        </div>
+        </div>
+      ) : (
+        <div className="no-project-selected">
+          <Typography variant="h4">No project selected.</Typography>
+        </div>
+      )}
+    </div>
+  );
+};
 
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
