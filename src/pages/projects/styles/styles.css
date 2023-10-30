@@ -152,6 +152,10 @@ form .form-row .textarea{
     }
 }
 
-.checkbox{
-    margin-left: 5px;
+.radio{
+    margin-top:20px;
+    margin-bottom: 20px;
 }
+
+
+
