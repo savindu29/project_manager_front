@@ -1,14 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import MiniDrawer from './layouts/side-bar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Projects from "./pages/projects";
 
 function App() {
-  return (
-    <div >
-      <MiniDrawer/>
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path={"/project"} element={<Projects />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
