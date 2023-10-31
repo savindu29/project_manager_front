@@ -7,6 +7,15 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+
+
+import "react-datepicker/dist/react-datepicker.css";
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -74,6 +83,9 @@ function ShowFunction(){
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    const Example = () => {
+        const [startDate, setStartDate] = useState(new Date());}
 
 
 
@@ -177,6 +189,68 @@ function ShowFunction(){
                             <label htmlFor="">Project Status</label>
                         </div>
                     </div>
+                    <div className="form-row">
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Latest Project Status Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Initiation Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Proposed Implementation Start Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Proposed Implementation End Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Actual Implementation Start Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Implementation Due Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="input-data">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker label="Actual Implementation End Date" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                        <div className="input-data">
+
+                        </div>
+                    </div>
+
+
                     <div className="form-row">
                         <label>Third Party project?</label>
                         <div className={"checkbox"}>
